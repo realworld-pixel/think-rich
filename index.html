@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo — 30 Din Mein Double (daily earning )</title>
+  <style>
+    :root{--accent:#ff4d4f;--dark:#0f1724;--muted:#6b7280;--card:#0b1220}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:linear-gradient(180deg,#071024 0%, #071b2b 60%);color:#e6eef8}
+    .container{max-width:1100px;margin:32px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff7a7a);display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+    h1{margin:0;font-size:24px}
+    .tag{color:var(--muted);font-size:13px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;margin-top:28px;align-items:start}
+    .card{background:rgba(255,255,255,0.03);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .cta{display:flex;gap:12px;align-items:center;margin-top:16px}
+    .btn{background:var(--accent);border:none;padding:12px 16px;border-radius:10px;color:white;cursor:pointer;font-weight:600}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);padding:10px 14px;border-radius:10px;color:#dbe7ff;cursor:pointer}
+    .simulator h3{margin:0 0 8px 0}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=number], input[type=text], input[type=password]{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit}
+    .result{margin-top:12px;padding:12px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));font-weight:600}
+    .features{display:flex;gap:12px;margin-top:18px}
+    .feature{flex:1;padding:14px;border-radius:10px;background:rgba(255,255,255,0.02);text-align:center}
+    .footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
+    .badge{background:#111827;padding:6px 10px;border-radius:999px;font-weight:600;color:#fca5a5}
+    .disclaimer{margin-top:14px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);color:#ffd1d1;border:1px dashed rgba(255,255,255,0.04)}
+    /* login modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.7);display:none;align-items:center;justify-content:center;z-index:2000}
+    .modal{width:360px;background:linear-gradient(180deg,#071424,#071b2b);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(2,6,23,0.6)}
+    .modal h3{margin:0 0 12px 0}
+    .row{display:flex;gap:8px}
+    .small{font-size:13px;color:var(--muted)}
+    .user-area{display:flex;gap:12px;align-items:center}
+    .avatar{width:36px;height:36px;border-radius:999px;background:linear-gradient(135deg,#ff7a7a,#ffbaba);display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+    .login-actions{display:flex;gap:8px;align-items:center}
+    .hidden{display:none}
+    @media(max-width:880px){.hero{grid-template-columns:1fr;}.brand h1{font-size:18px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">DB</div>
+        <div>
+          <h1>DoubleBase — daily earning</h1>
+          <div class="tag">Visual demo — betting-style UI (no real betting / no payments)</div>
+        </div>
+      </div>
+      <div class="user-area" id="headerRight">
+        <span class="badge">real MODE</span>
+        <!-- Login / user area will be populated by JS -->
+        <div id="authArea" style="margin-left:12px">
+          <button class="btn" id="loginBtn" onclick="showLoginModal()">Login</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="hero">
+      <section class="card">
+        <h2>30 दिनों में पैसे डबल (daily earning upto 5000)</h2>
+        <p class="tag">"ये असली और रियल तरीका है पैसे कमाने का"</p>
+        <p class="tag">सच्चा रास्ता है कमाई का — बिना धोक़-धड़ी के। — <strong>असली कमाई का सीधा तरीका।</strong> यहाँ दिखाया गया "₹5,000/दिन" एक सिम्युलेटेड/उदाहरणात्मक संख्या है, वास्तविक परिणाम भिन्न होंगे।</p>
+
+        <div style="margin-top:14px">
+          <p>यह तरीका सच में पैसे देता है — नियम के साथ।</p>
+          <div class="cta">
+            <button class="btn" onclick="openDemo()">Try Simulator</button>
+            <button class="ghost" onclick="showDisclaimer()">Disclaimer</button>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <strong>रिलैक्स्ड UI</strong>
+            <div style="font-size:13px;color:var(--muted);margin-top:6px">मोबाइल & डेस्कटॉप</div>
+          </div>
+          <div class="feature">
+            <strong>सिम्युलेटर</strong>
+            <div style="font-size:13px;color:var(--muted);margin-top:6px">हाइपोथेटिकल रिटर्न दिखाये</div>
+          </div>
+          <div class="feature">
+            <strong>नो पेमेंट</strong>
+            <div style="font-size:13px;color:var(--muted);margin-top:6px">सुरक्षित, ऑफलाइन</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <h3>How it looks (example odds)</h3>
+          <ul style="color:var(--muted);font-size:14px">
+            <li>स्लॉट्स — 2x, 3x दिखने वाले बटन (डेमो)</li>
+            <li>स्पोर्ट्स-स्टाइल चार्ट — विजुअल प्रेजेन्टेशन</li>
+            <li>लाइव-टिकर — टेस्ट डेटा से चलने वाला</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <aside class="card simulator" id="simCard">
+        <h3>डेमो सिम्युलेटर</h3>
+        <p class="tag">इनपुट डालें और देखें कि 30 दिनों में डबल करने के लिए रोज़ाना कितना प्रतिशत चाहिए (हाइपोथेटिकल)</p>
+
+        <label for="amount">आरंभिक राशि (₹)</label>
+        <input type="number" id="amount" value="1000" min="1" />
+
+        <label for="days" style="margin-top:8px">दिन (default 30)</label>
+        <input type="number" id="days" value="30" min="1" />
+
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button class="btn" id="calcBtn" onclick="calculate()">Calculate</button>
+          <button class="ghost" onclick="resetSim()">Reset</button>
+        </div>
+
+        <div id="result" class="result" style="display:none"></div>
+
+        <div class="disclaimer">
+          <strong>महत्वपूर्ण:</strong> यह केवल शैक्षिक/दिखावटी गणना है। असली दुनिया में निवेश/सट्टेबाज़ी जोखिमपूर्ण है।
+        </div>
+      </aside>
+    </main>
+
+    <div class="card" style="margin-top:18px">
+      <h3>FAQ</h3>
+      <p><strong>Q:</strong> क्या यह साइट असली है?<br><strong>A:</strong> नहीं। यह सिर्फ दिखावटी टेम्पलेट है।</p>
+      <p><strong>Q:</strong> क्या मैं इसे अपना बना सकता हूँ?<br><strong>A:</strong> हाँ — पर ध्यान रहे कि असली पैसे शामिल करने से पहले कानूनी और भुगतान नियमों का पालन करना ज़रूरी है।</p>
+    </div>
+
+    <div class="footer">
+      © Demo — For educational/visual use only. Not a real betting product. Designed by ChatGPT.
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <h3 id="loginTitle">Login to DoubleBase (डेमो)</h3>
+      <p class="small">यह एक क्लाइंट-साइड डेमो लॉगिन है — असली ऑथ नहीं। केवल शैक्षिक उद्देश्यों के लिए।</p>
+
+      <div style="margin-top:10px">
+        <label for="username">यूज़रनेम</label>
+        <input type="text" id="username" placeholder="अपना नाम लिखें (eg. Banti)" />
+
+        <label for="password" style="margin-top:8px">पासवर्ड</label>
+        <input type="password" id="password" placeholder="डेमो पासवर्ड" />
+
+        <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+          <input type="checkbox" id="remember" />
+          <label for="remember" class="small" style="margin:0">Remember me</label>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn" onclick="submitLogin()">Login</button>
+          <button class="ghost" onclick="closeLoginModal()">Cancel</button>
+        </div>
+
+        <p id="loginMsg" class="small" style="margin-top:10px;color:#ffd1d1;display:none"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Auth (client-side demo) ---
+    const modal = document.getElementById('modalBackdrop');
+    const authArea = document.getElementById('authArea');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginMsg = document.getElementById('loginMsg');
+
+    function showLoginModal(){
+      document.getElementById('username').value = localStorage.getItem('demo_username') || '';
+      document.getElementById('password').value = '';
+      document.getElementById('remember').checked = !!localStorage.getItem('demo_remember');
+      loginMsg.style.display='none';
+      modal.style.display='flex';
+    }
+    function closeLoginModal(){
+      modal.style.display='none';
+    }
+
+    function submitLogin(){
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      const remember = document.getElementById('remember').checked;
+
+      if(!user || !pass){
+        loginMsg.textContent = 'यूज़रनेम और पासवर्ड दोनों जरूर भरें।';
+        loginMsg.style.display='block';
+        return;
+      }
+
+      // DEMO: Accept any credentials (educational). Mark user as logged in.
+      const session = { username: user, loginAt: Date.now() };
+      localStorage.setItem('demo_session', JSON.stringify(session));
+      if(remember){
+        localStorage.setItem('demo_username', user);
+        localStorage.setItem('demo_remember', '1');
+      } else {
+        localStorage.removeItem('demo_username');
+        localStorage.removeItem('demo_remember');
+      }
+
+      closeLoginModal();
+      renderAuthArea();
+      alert('सफलतः लॉगिन हुआ — स्वागत है ' + user + '!');
+    }
+
+    function logout(){
+      localStorage.removeItem('demo_session');
+      renderAuthArea();
+      alert('आप लॉगआउट हो गए।');
+    }
+
+    function getSession(){
+      try {
+        return JSON.parse(localStorage.getItem('demo_session'));
+      } catch(e){
+        return null;
+      }
+    }
+
+    function renderAuthArea(){
+      const session = getSession();
+      if(session && session.username){
+        // show user badge + logout
+        authArea.innerHTML = `
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="avatar">${escapeInitials(session.username)}</div>
+            <div style="text-align:right">
+              <div style="font-weight:700">${escapeHtml(session.username)}</div>
+              <div class="small" style="color:var(--muted)">Demo account</div>
+            </div>
+            <div class="login-actions">
+              <button class="ghost" onclick="logout()">Logout</button>
+            </div>
+          </div>
+        `;
+      } else {
+        authArea.innerHTML = '<button class="btn" id="loginBtn" onclick="showLoginModal()">Login</button>';
+      }
+    }
+
+    function escapeHtml(text){
+      return text.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];});
+    }
+    function escapeInitials(name){
+      const parts = name.split(/\s+/).filter(Boolean);
+      if(parts.length === 0) return 'U';
+      if(parts.length === 1) return parts[0].charAt(0).toUpperCase();
+      return (parts[0].charAt(0) + parts[parts.length-1].charAt(0)).toUpperCase();
+    }
+
+    // initialize
+    renderAuthArea();
+
+    // --- Demo helpers: ensure user logged in to use simulator ---
+    function requireLogin(action){
+      const session = getSession();
+      if(!session || !session.username){
+        showLoginModal();
+        loginMsg.textContent = 'सिम्युलेटर इस्तेमाल करने के लिए पहले लॉगिन करें।';
+        loginMsg.style.display='block';
+        return false;
+      }
+      return true;
+    }
+
+    function openDemo(){
+      document.getElementById('simCard').scrollIntoView({behavior:'smooth'});
+    }
+    function showDisclaimer(){
+      alert('NOTICE: This is a visual demo only. No real betting, no payments, no financial advice.');
+    }
+
+    function calculate(){
+      if(!requireLogin()) return; // block if not logged in
+      const amt = parseFloat(document.getElementById('amount').value) || 0;
+      const days = parseInt(document.getElementById('days').value) || 30;
+      if(amt<=0 || days<=0){alert('Valid input required');return}
+      // required daily compound rate to reach 2x in `days`
+      const targetFactor = 2;
+      const dailyRate = Math.pow(targetFactor, 1/days) - 1;
+      const dailyPct = (dailyRate*100).toFixed(2);
+      const result = document.getElementById('result');
+      const projected = (amt * Math.pow(1+dailyRate, days)).toFixed(2);
+      result.style.display='block';
+      result.innerHTML = `Start: ₹${amt.toLocaleString()}<br>Days: ${days}<br>Required daily compound return (approx): <strong>${dailyPct}%</strong><br>Projected after ${days} days (hypothetical): <strong>₹${Number(projected).toLocaleString()}</strong>`;
+    }
+    function resetSim(){
+      document.getElementById('amount').value='1000';
+      document.getElementById('days').value='30';
+      document.getElementById('result').style.display='none';
+    }
+
+    // close modal when clicking outside
+    modal.addEventListener('click', function(e){
+      if(e.target === modal){ closeLoginModal(); }
+    });
+
+    // prevent form auto-submit on Enter in inputs
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' && modal.style.display === 'flex'){
+        e.preventDefault();
+        submitLogin();
+      }
+    });
+  </script>
+</body>
+</html>
