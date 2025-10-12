@@ -38,6 +38,7 @@
     .avatar{width:36px;height:36px;border-radius:999px;background:linear-gradient(135deg,#ff7a7a,#ffbaba);display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
     .login-actions{display:flex;gap:8px;align-items:center}
     .hidden{display:none}
+    .wallet-balance{font-weight:700;font-size:18px}
     @media(max-width:880px){.hero{grid-template-columns:1fr;}.brand h1{font-size:18px}}
   </style>
 </head>
@@ -162,11 +163,44 @@
     </div>
   </div>
 
+  <!-- Wallet Modal -->
+  <div class="modal-backdrop" id="walletBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="walletTitle">
+      <h3 id="walletTitle">Wallet — आपका वॉलेट</h3>
+      <p class="small">यह वॉलेट सिर्फ डेमो के लिए है। शेष राशि ब्राउज़र के localStorage में सेव होती है।</p>
+
+      <div style="margin-top:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div>
+            <div class="small">Available Balance</div>
+            <div class="wallet-balance" id="walletBalance">₹0</div>
+          </div>
+          <div style="text-align:right">
+            <div class="small">Account</div>
+            <div id="walletUser" style="font-weight:700">—</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="btn" onclick="walletAdd(100)">Add ₹100</button>
+          <button class="btn" onclick="walletAdd(500)">Add ₹500</button>
+          <button class="ghost" onclick="walletWithdraw(100)">Withdraw ₹100</button>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+          <button class="ghost" onclick="closeWalletModal()">Close</button>
+        </div>
+
+        <p class="small" style="margin-top:10px;color:var(--muted)">Note: यह केवल डेमो है — असली भुगतान नहीं होंगे।</p>
+      </div>
+    </div>
+  </div>
+
   <script>
     // --- Auth (client-side demo) ---
     const modal = document.getElementById('modalBackdrop');
+    const walletBackdrop = document.getElementById('walletBackdrop');
     const authArea = document.getElementById('authArea');
-    const loginBtn = document.getElementById('loginBtn');
     const loginMsg = document.getElementById('loginMsg');
 
     function showLoginModal(){
@@ -202,6 +236,9 @@
         localStorage.removeItem('demo_remember');
       }
 
+      // ensure wallet exists for this user
+      ensureWalletInitialized();
+
       closeLoginModal();
       renderAuthArea();
       alert('सफलतः लॉगिन हुआ — स्वागत है ' + user + '!');
@@ -224,7 +261,7 @@
     function renderAuthArea(){
       const session = getSession();
       if(session && session.username){
-        // show user badge + logout
+        // show user badge + wallet button + logout
         authArea.innerHTML = `
           <div style="display:flex;align-items:center;gap:8px">
             <div class="avatar">${escapeInitials(session.username)}</div>
@@ -233,6 +270,7 @@
               <div class="small" style="color:var(--muted)">Demo account</div>
             </div>
             <div class="login-actions">
+              <button class="ghost" onclick="showWalletModal()">Wallet</button>
               <button class="ghost" onclick="logout()">Logout</button>
             </div>
           </div>
@@ -255,18 +293,67 @@
     // initialize
     renderAuthArea();
 
-    // --- Demo helpers: ensure user logged in to use simulator ---
+    // --- Wallet logic ---
+    const WALLET_KEY = 'demo_wallet_balance';
+    function ensureWalletInitialized(){
+      // if no wallet exists, create with 200
+      if(localStorage.getItem(WALLET_KEY) === null){
+        localStorage.setItem(WALLET_KEY, JSON.stringify(200));
+      }
+    }
+
+    // call once on load so even before login there's a wallet value
+    ensureWalletInitialized();
+
     function requireLogin(action){
       const session = getSession();
       if(!session || !session.username){
         showLoginModal();
-        loginMsg.textContent = 'सिम्युलेटर इस्तेमाल करने के लिए पहले लॉगिन करें।';
+        loginMsg.textContent = 'सिम्युलेटर/वॉलेट इस्तेमाल करने के लिए पहले लॉगिन करें।';
         loginMsg.style.display='block';
         return false;
       }
       return true;
     }
 
+    function showWalletModal(){
+      if(!requireLogin()) return;
+      const session = getSession();
+      document.getElementById('walletUser').textContent = session.username;
+      updateWalletDisplay();
+      walletBackdrop.style.display = 'flex';
+    }
+    function closeWalletModal(){
+      walletBackdrop.style.display = 'none';
+    }
+
+    function getWalletBalance(){
+      try{
+        return Number(JSON.parse(localStorage.getItem(WALLET_KEY)) || 0);
+      }catch(e){return 0}
+    }
+    function setWalletBalance(val){
+      localStorage.setItem(WALLET_KEY, JSON.stringify(val));
+      updateWalletDisplay();
+    }
+    function updateWalletDisplay(){
+      const bal = getWalletBalance();
+      document.getElementById('walletBalance').textContent = '₹' + bal.toLocaleString();
+    }
+
+    function walletAdd(amount){
+      const bal = getWalletBalance();
+      setWalletBalance(bal + Number(amount));
+      alert('₹' + amount + ' add ho gaya. New balance: ₹' + getWalletBalance());
+    }
+    function walletWithdraw(amount){
+      const bal = getWalletBalance();
+      if(bal < amount){ alert('Insufficient balance'); return; }
+      setWalletBalance(bal - Number(amount));
+      alert('₹' + amount + ' withdraw ho gaya. New balance: ₹' + getWalletBalance());
+    }
+
+    // --- Demo helpers: ensure user logged in to use simulator ---
     function openDemo(){
       document.getElementById('simCard').scrollIntoView({behavior:'smooth'});
     }
@@ -298,6 +385,7 @@
     modal.addEventListener('click', function(e){
       if(e.target === modal){ closeLoginModal(); }
     });
+    walletBackdrop.addEventListener('click', function(e){ if(e.target === walletBackdrop){ closeWalletModal(); } });
 
     // prevent form auto-submit on Enter in inputs
     document.addEventListener('keydown', function(e){
