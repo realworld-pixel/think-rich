@@ -167,7 +167,7 @@
   <div class="modal-backdrop" id="walletBackdrop">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="walletTitle">
       <h3 id="walletTitle">Wallet — आपका वॉलेट</h3>
-      <p class="small">यह वॉलेट सिर्फ डेमो के लिए है। शेष राशि ब्राउज़र के localStorage में सेव होती है।</p>
+      <p class="small">"कम से कम 2200 निकालेगा"</p>
 
       <div style="margin-top:12px">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
@@ -182,16 +182,17 @@
         </div>
 
         <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="btn" onclick="walletAdd(100)">Add ₹100</button>
+          <button class="btn" onclick="walletAdd(100)">Add ₹1000</button>
           <button class="btn" onclick="walletAdd(500)">Add ₹500</button>
-          <button class="ghost" onclick="walletWithdraw(100)">Withdraw ₹100</button>
+          <button class="ghost" onclick="walletWithdraw(100)">Withdraw ₹2200
+          </button>
         </div>
 
         <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
           <button class="ghost" onclick="closeWalletModal()">Close</button>
         </div>
 
-        <p class="small" style="margin-top:10px;color:var(--muted)">Note: यह केवल डेमो है — असली भुगतान नहीं होंगे।</p>
+        <p class="small" style="margin-top:10px;color:var(--muted)">Note: "पैसे ही पैसा"।</p>
       </div>
     </div>
   </div>
