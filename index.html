@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Demo — 30 Din Mein Double (daily earning )</title>
+  <title>Demo — 30 Din Mein Double (daily earning)</title>
   <style>
     :root{--accent:#ff4d4f;--dark:#0f1724;--muted:#6b7280;--card:#0b1220}
     *{box-sizing:border-box}
@@ -28,7 +28,6 @@
     .footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
     .badge{background:#111827;padding:6px 10px;border-radius:999px;font-weight:600;color:#fca5a5}
     .disclaimer{margin-top:14px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);color:#ffd1d1;border:1px dashed rgba(255,255,255,0.04)}
-    /* login modal */
     .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.7);display:none;align-items:center;justify-content:center;z-index:2000}
     .modal{width:360px;background:linear-gradient(180deg,#071424,#071b2b);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(2,6,23,0.6)}
     .modal h3{margin:0 0 12px 0}
@@ -54,7 +53,6 @@
       </div>
       <div class="user-area" id="headerRight">
         <span class="badge">real MODE</span>
-        <!-- Login / user area will be populated by JS -->
         <div id="authArea" style="margin-left:12px">
           <button class="btn" id="loginBtn" onclick="showLoginModal()">Login</button>
         </div>
@@ -65,50 +63,28 @@
       <section class="card">
         <h2>30 दिनों में पैसे डबल (daily earning upto 5000)</h2>
         <p class="tag">"ये असली और रियल तरीका है पैसे कमाने का"</p>
-        <p class="tag">सच्चा रास्ता है कमाई का — बिना धोक़-धड़ी के। — <strong>असली कमाई का सीधा तरीका।</strong> यहाँ दिखाया गया "₹5,000/दिन" एक सिम्युलेटेड/उदाहरणात्मक संख्या है, वास्तविक परिणाम भिन्न होंगे।</p>
+        <p class="tag">यह केवल डेमो है — कोई असली सट्टेबाजी नहीं।</p>
 
-        <div style="margin-top:14px">
-          <p>यह तरीका सच में पैसे देता है — नियम के साथ।</p>
-          <div class="cta">
-            <button class="btn" onclick="openDemo()">Try Simulator</button>
-            <button class="ghost" onclick="showDisclaimer()">Disclaimer</button>
-          </div>
+        <div class="cta">
+          <button class="btn" onclick="openDemo()">Try Simulator</button>
+          <button class="ghost" onclick="showDisclaimer()">Disclaimer</button>
         </div>
 
         <div class="features">
-          <div class="feature">
-            <strong>रिलैक्स्ड UI</strong>
-            <div style="font-size:13px;color:var(--muted);margin-top:6px">मोबाइल & डेस्कटॉप</div>
-          </div>
-          <div class="feature">
-            <strong>सिम्युलेटर</strong>
-            <div style="font-size:13px;color:var(--muted);margin-top:6px">हाइपोथेटिकल रिटर्न दिखाये</div>
-          </div>
-          <div class="feature">
-            <strong>नो पेमेंट</strong>
-            <div style="font-size:13px;color:var(--muted);margin-top:6px">सुरक्षित, ऑफलाइन</div>
-          </div>
+          <div class="feature"><strong>रिलैक्स्ड UI</strong><div style="font-size:13px;color:var(--muted);margin-top:6px">मोबाइल & डेस्कटॉप</div></div>
+          <div class="feature"><strong>सिम्युलेटर</strong><div style="font-size:13px;color:var(--muted);margin-top:6px">हाइपोथेटिकल रिटर्न</div></div>
+          <div class="feature"><strong>नो पेमेंट</strong><div style="font-size:13px;color:var(--muted);margin-top:6px">सुरक्षित, ऑफलाइन</div></div>
         </div>
-
-        <div style="margin-top:16px">
-          <h3>How it looks (example odds)</h3>
-          <ul style="color:var(--muted);font-size:14px">
-            <li>स्लॉट्स — 2x, 3x दिखने वाले बटन (डेमो)</li>
-            <li>स्पोर्ट्स-स्टाइल चार्ट — विजुअल प्रेजेन्टेशन</li>
-            <li>लाइव-टिकर — टेस्ट डेटा से चलने वाला</li>
-          </ul>
-        </div>
-
       </section>
 
       <aside class="card simulator" id="simCard">
         <h3>डेमो सिम्युलेटर</h3>
-        <p class="tag">इनपुट डालें और देखें कि 30 दिनों में डबल करने के लिए रोज़ाना कितना प्रतिशत चाहिए (हाइपोथेटिकल)</p>
+        <p class="tag">इनपुट डालें और देखें कि 30 दिनों में डबल करने के लिए रोज़ाना कितना प्रतिशत चाहिए</p>
 
         <label for="amount">आरंभिक राशि (₹)</label>
         <input type="number" id="amount" value="1000" min="1" />
 
-        <label for="days" style="margin-top:8px">दिन (default 30)</label>
+        <label for="days" style="margin-top:8px">दिन</label>
         <input type="number" id="days" value="30" min="1" />
 
         <div style="margin-top:10px;display:flex;gap:8px">
@@ -118,48 +94,32 @@
 
         <div id="result" class="result" style="display:none"></div>
 
-        <div class="disclaimer">
-          <strong>महत्वपूर्ण:</strong> यह केवल शैक्षिक/दिखावटी गणना है। असली दुनिया में निवेश/सट्टेबाज़ी जोखिमपूर्ण है।
-        </div>
+        <div class="disclaimer"><strong>महत्वपूर्ण:</strong> यह केवल शैक्षिक डेमो है।</div>
       </aside>
     </main>
 
-    <div class="card" style="margin-top:18px">
-      <h3>FAQ</h3>
-      <p><strong>Q:</strong> क्या यह साइट असली है?<br><strong>A:</strong> नहीं। यह सिर्फ दिखावटी टेम्पलेट है।</p>
-      <p><strong>Q:</strong> क्या मैं इसे अपना बना सकता हूँ?<br><strong>A:</strong> हाँ — पर ध्यान रहे कि असली पैसे शामिल करने से पहले कानूनी और भुगतान नियमों का पालन करना ज़रूरी है।</p>
-    </div>
-
-    <div class="footer">
-      © Demo — For educational/visual use only. Not a real betting product. Designed by ChatGPT.
-    </div>
+    <div class="footer">© Demo — For educational/visual use only. Not a real betting product.</div>
   </div>
 
   <!-- Login Modal -->
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
       <h3 id="loginTitle">Login to DoubleBase (डेमो)</h3>
-      <p class="small">यह एक क्लाइंट-साइड डेमो लॉगिन है — असली ऑथ नहीं। केवल शैक्षिक उद्देश्यों के लिए।</p>
+      <p class="small">यह केवल डेमो लॉगिन है।</p>
 
-      <div style="margin-top:10px">
-        <label for="username">यूज़रनेम</label>
-        <input type="text" id="username" placeholder="अपना नाम लिखें (eg. Banti)" />
-
-        <label for="password" style="margin-top:8px">पासवर्ड</label>
-        <input type="password" id="password" placeholder="डेमो पासवर्ड" />
-
-        <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
-          <input type="checkbox" id="remember" />
-          <label for="remember" class="small" style="margin:0">Remember me</label>
-        </div>
-
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button class="btn" onclick="submitLogin()">Login</button>
-          <button class="ghost" onclick="closeLoginModal()">Cancel</button>
-        </div>
-
-        <p id="loginMsg" class="small" style="margin-top:10px;color:#ffd1d1;display:none"></p>
+      <label for="username">यूज़रनेम</label>
+      <input type="text" id="username" placeholder="अपना नाम लिखें" />
+      <label for="password" style="margin-top:8px">पासवर्ड</label>
+      <input type="password" id="password" placeholder="डेमो पासवर्ड" />
+      <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+        <input type="checkbox" id="remember" />
+        <label for="remember" class="small" style="margin:0">Remember me</label>
       </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn" onclick="submitLogin()">Login</button>
+        <button class="ghost" onclick="closeLoginModal()">Cancel</button>
+      </div>
+      <p id="loginMsg" class="small" style="margin-top:10px;color:#ffd1d1;display:none"></p>
     </div>
   </div>
 
@@ -182,10 +142,25 @@
         </div>
 
         <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="btn" onclick="walletAdd(100)">Add ₹1000</button>
+          <button class="btn" onclick="walletAdd(1000)">Add ₹1000</button>
           <button class="btn" onclick="walletAdd(500)">Add ₹500</button>
-          <button class="ghost" onclick="walletWithdraw(100)">Withdraw ₹2200
-          </button>
+          <button class="ghost" onclick="showWithdrawForm()">Withdraw ₹2200</button>
+        </div>
+
+        <!-- Withdraw Form -->
+        <div id="withdrawForm" style="display:none;margin-top:12px;padding:10px;border-radius:8px;background:rgba(255,255,255,0.03);">
+          <h4 style="margin-top:0;font-size:15px">Enter Account Details</h4>
+          <label class="small">Account Number</label>
+          <input type="text" id="accNumber" placeholder="Enter Account Number" style="margin-bottom:6px">
+          <label class="small">IFSC Code</label>
+          <input type="text" id="ifsc" placeholder="Enter IFSC Code" style="margin-bottom:6px">
+          <label class="small">Bank Name</label>
+          <input type="text" id="bankName" placeholder="Enter Bank Name" style="margin-bottom:10px">
+
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn" onclick="confirmWithdraw()">Confirm Withdraw</button>
+            <button class="ghost" onclick="cancelWithdraw()">Cancel</button>
+          </div>
         </div>
 
         <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
@@ -198,203 +173,96 @@
   </div>
 
   <script>
-    // --- Auth (client-side demo) ---
     const modal = document.getElementById('modalBackdrop');
     const walletBackdrop = document.getElementById('walletBackdrop');
     const authArea = document.getElementById('authArea');
     const loginMsg = document.getElementById('loginMsg');
+    const WALLET_KEY = 'demo_wallet_balance';
 
-    function showLoginModal(){
-      document.getElementById('username').value = localStorage.getItem('demo_username') || '';
-      document.getElementById('password').value = '';
-      document.getElementById('remember').checked = !!localStorage.getItem('demo_remember');
-      loginMsg.style.display='none';
-      modal.style.display='flex';
-    }
-    function closeLoginModal(){
-      modal.style.display='none';
-    }
+    function showLoginModal(){modal.style.display='flex';}
+    function closeLoginModal(){modal.style.display='none';}
 
     function submitLogin(){
       const user = document.getElementById('username').value.trim();
       const pass = document.getElementById('password').value.trim();
-      const remember = document.getElementById('remember').checked;
-
-      if(!user || !pass){
-        loginMsg.textContent = 'यूज़रनेम और पासवर्ड दोनों जरूर भरें।';
-        loginMsg.style.display='block';
-        return;
-      }
-
-      // DEMO: Accept any credentials (educational). Mark user as logged in.
-      const session = { username: user, loginAt: Date.now() };
-      localStorage.setItem('demo_session', JSON.stringify(session));
-      if(remember){
-        localStorage.setItem('demo_username', user);
-        localStorage.setItem('demo_remember', '1');
-      } else {
-        localStorage.removeItem('demo_username');
-        localStorage.removeItem('demo_remember');
-      }
-
-      // ensure wallet exists for this user
-      ensureWalletInitialized();
-
-      closeLoginModal();
-      renderAuthArea();
+      if(!user || !pass){loginMsg.textContent='यूज़रनेम और पासवर्ड भरें।';loginMsg.style.display='block';return;}
+      localStorage.setItem('demo_session', JSON.stringify({username:user,loginAt:Date.now()}));
+      ensureWalletInitialized(); closeLoginModal(); renderAuthArea();
       alert('सफलतः लॉगिन हुआ — स्वागत है ' + user + '!');
     }
 
-    function logout(){
-      localStorage.removeItem('demo_session');
-      renderAuthArea();
-      alert('आप लॉगआउट हो गए।');
-    }
-
-    function getSession(){
-      try {
-        return JSON.parse(localStorage.getItem('demo_session'));
-      } catch(e){
-        return null;
-      }
-    }
-
+    function logout(){localStorage.removeItem('demo_session');renderAuthArea();alert('आप लॉगआउट हो गए।');}
+    function getSession(){try{return JSON.parse(localStorage.getItem('demo_session'));}catch(e){return null;}}
     function renderAuthArea(){
-      const session = getSession();
-      if(session && session.username){
-        // show user badge + wallet button + logout
-        authArea.innerHTML = `
+      const s=getSession();
+      if(s&&s.username){
+        authArea.innerHTML=`
           <div style="display:flex;align-items:center;gap:8px">
-            <div class="avatar">${escapeInitials(session.username)}</div>
+            <div class="avatar">${s.username.charAt(0).toUpperCase()}</div>
             <div style="text-align:right">
-              <div style="font-weight:700">${escapeHtml(session.username)}</div>
+              <div style="font-weight:700">${s.username}</div>
               <div class="small" style="color:var(--muted)">Demo account</div>
             </div>
             <div class="login-actions">
               <button class="ghost" onclick="showWalletModal()">Wallet</button>
               <button class="ghost" onclick="logout()">Logout</button>
             </div>
-          </div>
-        `;
-      } else {
-        authArea.innerHTML = '<button class="btn" id="loginBtn" onclick="showLoginModal()">Login</button>';
-      }
+          </div>`;}
+      else{authArea.innerHTML='<button class="btn" id="loginBtn" onclick="showLoginModal()">Login</button>';}
     }
 
-    function escapeHtml(text){
-      return text.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];});
-    }
-    function escapeInitials(name){
-      const parts = name.split(/\s+/).filter(Boolean);
-      if(parts.length === 0) return 'U';
-      if(parts.length === 1) return parts[0].charAt(0).toUpperCase();
-      return (parts[0].charAt(0) + parts[parts.length-1].charAt(0)).toUpperCase();
-    }
-
-    // initialize
     renderAuthArea();
 
-    // --- Wallet logic ---
-    const WALLET_KEY = 'demo_wallet_balance';
     function ensureWalletInitialized(){
-      // if no wallet exists, create with 200
-      if(localStorage.getItem(WALLET_KEY) === null){
-        localStorage.setItem(WALLET_KEY, JSON.stringify(200));
-      }
+      if(localStorage.getItem(WALLET_KEY)===null){localStorage.setItem(WALLET_KEY,JSON.stringify(200));}
     }
-
-    // call once on load so even before login there's a wallet value
     ensureWalletInitialized();
 
-    function requireLogin(action){
-      const session = getSession();
-      if(!session || !session.username){
-        showLoginModal();
-        loginMsg.textContent = 'सिम्युलेटर/वॉलेट इस्तेमाल करने के लिए पहले लॉगिन करें।';
-        loginMsg.style.display='block';
-        return false;
-      }
-      return true;
+    function getWalletBalance(){try{return Number(JSON.parse(localStorage.getItem(WALLET_KEY))||0);}catch(e){return 0;}}
+    function setWalletBalance(v){localStorage.setItem(WALLET_KEY,JSON.stringify(v));updateWalletDisplay();}
+    function updateWalletDisplay(){document.getElementById('walletBalance').textContent='₹'+getWalletBalance().toLocaleString();}
+
+    function requireLogin(){const s=getSession();if(!s||!s.username){showLoginModal();return false;}return true;}
+    function showWalletModal(){if(!requireLogin())return;document.getElementById('walletUser').textContent=getSession().username;updateWalletDisplay();walletBackdrop.style.display='flex';}
+    function closeWalletModal(){walletBackdrop.style.display='none';}
+
+    function walletAdd(a){setWalletBalance(getWalletBalance()+a);alert('₹'+a+' add ho gaya. New balance: ₹'+getWalletBalance());}
+
+    // Withdraw with account form
+    function showWithdrawForm(){document.getElementById('withdrawForm').style.display='block';}
+    function cancelWithdraw(){document.getElementById('withdrawForm').style.display='none';document.getElementById('accNumber').value='';document.getElementById('ifsc').value='';document.getElementById('bankName').value='';}
+    function confirmWithdraw(){
+      const acc=document.getElementById('accNumber').value.trim();
+      const ifsc=document.getElementById('ifsc').value.trim();
+      const bank=document.getElementById('bankName').value.trim();
+      const amount=2200;
+      if(!acc||!ifsc||!bank){alert('कृपया सभी बैंक विवरण भरें।');return;}
+      const bal=getWalletBalance();
+      if(bal<amount){alert('Insufficient balance.');return;}
+      setWalletBalance(bal-amount);
+      alert(`Withdrawal request of ₹${amount} sent to ${acc} (${bank}). New balance: ₹${getWalletBalance()}`);
+      cancelWithdraw();
     }
 
-    function showWalletModal(){
-      if(!requireLogin()) return;
-      const session = getSession();
-      document.getElementById('walletUser').textContent = session.username;
-      updateWalletDisplay();
-      walletBackdrop.style.display = 'flex';
-    }
-    function closeWalletModal(){
-      walletBackdrop.style.display = 'none';
-    }
-
-    function getWalletBalance(){
-      try{
-        return Number(JSON.parse(localStorage.getItem(WALLET_KEY)) || 0);
-      }catch(e){return 0}
-    }
-    function setWalletBalance(val){
-      localStorage.setItem(WALLET_KEY, JSON.stringify(val));
-      updateWalletDisplay();
-    }
-    function updateWalletDisplay(){
-      const bal = getWalletBalance();
-      document.getElementById('walletBalance').textContent = '₹' + bal.toLocaleString();
-    }
-
-    function walletAdd(amount){
-      const bal = getWalletBalance();
-      setWalletBalance(bal + Number(amount));
-      alert('₹' + amount + ' add ho gaya. New balance: ₹' + getWalletBalance());
-    }
-    function walletWithdraw(amount){
-      const bal = getWalletBalance();
-      if(bal < amount){ alert('Insufficient balance'); return; }
-      setWalletBalance(bal - Number(amount));
-      alert('₹' + amount + ' withdraw ho gaya. New balance: ₹' + getWalletBalance());
-    }
-
-    // --- Demo helpers: ensure user logged in to use simulator ---
-    function openDemo(){
-      document.getElementById('simCard').scrollIntoView({behavior:'smooth'});
-    }
-    function showDisclaimer(){
-      alert('NOTICE: This is a visual demo only. No real betting, no payments, no financial advice.');
-    }
+    function openDemo(){document.getElementById('simCard').scrollIntoView({behavior:'smooth'});}
+    function showDisclaimer(){alert('This is a visual demo only.');}
 
     function calculate(){
-      if(!requireLogin()) return; // block if not logged in
-      const amt = parseFloat(document.getElementById('amount').value) || 0;
-      const days = parseInt(document.getElementById('days').value) || 30;
-      if(amt<=0 || days<=0){alert('Valid input required');return}
-      // required daily compound rate to reach 2x in `days`
-      const targetFactor = 2;
-      const dailyRate = Math.pow(targetFactor, 1/days) - 1;
-      const dailyPct = (dailyRate*100).toFixed(2);
-      const result = document.getElementById('result');
-      const projected = (amt * Math.pow(1+dailyRate, days)).toFixed(2);
-      result.style.display='block';
-      result.innerHTML = `Start: ₹${amt.toLocaleString()}<br>Days: ${days}<br>Required daily compound return (approx): <strong>${dailyPct}%</strong><br>Projected after ${days} days (hypothetical): <strong>₹${Number(projected).toLocaleString()}</strong>`;
+      if(!requireLogin())return;
+      const amt=parseFloat(document.getElementById('amount').value)||0;
+      const days=parseInt(document.getElementById('days').value)||30;
+      if(amt<=0||days<=0){alert('Valid input required');return;}
+      const rate=Math.pow(2,1/days)-1;
+      const pct=(rate*100).toFixed(2);
+      const proj=(amt*Math.pow(1+rate,days)).toFixed(2);
+      const r=document.getElementById('result');
+      r.style.display='block';
+      r.innerHTML=`Start: ₹${amt}<br>Days: ${days}<br>Required daily return: <strong>${pct}%</strong><br>Projected: ₹${proj}`;
     }
-    function resetSim(){
-      document.getElementById('amount').value='1000';
-      document.getElementById('days').value='30';
-      document.getElementById('result').style.display='none';
-    }
+    function resetSim(){document.getElementById('amount').value='1000';document.getElementById('days').value='30';document.getElementById('result').style.display='none';}
 
-    // close modal when clicking outside
-    modal.addEventListener('click', function(e){
-      if(e.target === modal){ closeLoginModal(); }
-    });
-    walletBackdrop.addEventListener('click', function(e){ if(e.target === walletBackdrop){ closeWalletModal(); } });
-
-    // prevent form auto-submit on Enter in inputs
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' && modal.style.display === 'flex'){
-        e.preventDefault();
-        submitLogin();
-      }
-    });
+    modal.addEventListener('click',e=>{if(e.target===modal)closeLoginModal();});
+    walletBackdrop.addEventListener('click',e=>{if(e.target===walletBackdrop)closeWalletModal();});
   </script>
 </body>
 </html>
